@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Markov Chain Text Generation</title>
+    <style>
+    @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap');
+
+    body {
+        margin: 0;
+        font-family: 'Orbitron', sans-serif;
+        background: radial-gradient(circle at top left, #0f0c29, #302b63, #24243e);
+        color: #ffffff;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+        min-height: 100vh;
+        padding: 40px 20px;
+        box-sizing: border-box;
+    }
+
+    h1 {
+        font-size: 3rem;
+        margin-bottom: 30px;
+        color: #00ffe1;
+        text-shadow: 0 0 20px #00ffe1;
+        animation: glowTitle 2s infinite alternate;
+    }
+
+    @keyframes glowTitle {
+        from {
+            text-shadow: 0 0 10px #00ffe1, 0 0 20px #00ffe1;
+        }
+        to {
+            text-shadow: 0 0 30px #00ffe1, 0 0 60px #00ffe1;
+        }
+    }
+
+    form {
+        background: rgba(255, 255, 255, 0.05);
+        border: 2px solid #00ffe1;
+        padding: 30px;
+        border-radius: 12px;
+        box-shadow: 0 0 30px rgba(0, 255, 225, 0.3);
+        backdrop-filter: blur(8px);
+        animation: fadeInForm 1.5s ease-out;
+        max-width: 700px;
+        width: 100%;
+        text-align: center;
+    }
+
+    @keyframes fadeInForm {
+        from {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    input[type="text"] {
+        width: 80%;
+        max-width: 500px;
+        padding: 15px;
+        border-radius: 8px;
+        border: 2px solid #00ffe1;
+        background: #1a1a2e;
+        color: #ffffff;
+        font-size: 1rem;
+        outline: none;
+        transition: border-color 0.3s, box-shadow 0.3s;
+    }
+
+    input[type="text"]:focus {
+        border-color: #ff4b2b;
+        box-shadow: 0 0 10px #ff4b2b;
+    }
+
+    button {
+        margin-top: 20px;
+        padding: 12px 30px;
+        font-size: 1.1rem;
+        background: linear-gradient(45deg, #ff416c, #ff4b2b);
+        border: none;
+        border-radius: 8px;
+        color: white;
+        cursor: pointer;
+        transition: transform 0.2s, box-shadow 0.3s;
+        box-shadow: 0 4px 15px rgba(255, 75, 43, 0.4);
+        font-weight: bold;
+        letter-spacing: 1px;
+    }
+
+    button:hover {
+        transform: scale(1.05);
+        box-shadow: 0 8px 20px rgba(255, 75, 43, 0.6);
+    }
+
+    h3 {
+        margin-top: 40px;
+        font-size: 2rem;
+        color: #ffe600;
+        text-shadow: 0 0 10px #ffe600;
+        animation: glowText 2s infinite alternate;
+    }
+
+    @keyframes glowText {
+        from {
+            text-shadow: 0 0 10px #ffe600;
+        }
+        to {
+            text-shadow: 0 0 30px #ffe600;
+        }
+    }
+
+    p {
+        font-size: 1.2rem;
+        background: rgba(255, 255, 255, 0.1);
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+        max-width: 800px;
+        line-height: 1.6;
+        backdrop-filter: blur(6px);
+        animation: fadeInText 1.5s ease-out;
+    }
+
+    @keyframes fadeInText {
+        from {
+            opacity: 0;
+        }
+        to {
+            opacity: 1;
+        }
+    }
+
+    @media (max-width: 600px) {
+        h1 {
+            font-size: 2rem;
+        }
+
+        form {
+            padding: 20px;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            font-size: 0.9rem;
+        }
+
+        button {
+            font-size: 0.9rem;
+        }
+    }
+</style>
+</head>
+<body>
+    <h1>Markov Chain Text Generation</h1>
+    <form method="POST">
+        <input type="text" name="start" placeholder="Enter a starting phrase" size="60">
+        <button type="submit">Generate</button>
+    </form>
+    {% if generated_text %}
+        <h3>Generated Text:</h3>
+        <p>{{ generated_text }}</p>
+    {% endif %}
+</body>
+</html>
