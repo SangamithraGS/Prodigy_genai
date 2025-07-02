@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Neural Style Transfer</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap');
+
+    body {
+      margin: 0;
+      font-family: 'Nunito', sans-serif;
+      background: linear-gradient(135deg, #fdfcfb 0%, #e2d1c3 100%);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+      color: #333;
+      position: relative;
+      padding: 20px;
+    }
+
+    body::before {
+      content: "";
+      position: absolute;
+      top: -150px;
+      left: -150px;
+      width: 400px;
+      height: 400px;
+      background: radial-gradient(circle, rgba(203,190,181,0.2), transparent 60%);
+      border-radius: 50%;
+      animation: float 10s ease-in-out infinite alternate;
+      z-index: 0;
+    }
+
+    body::after {
+      content: "";
+      position: absolute;
+      bottom: -150px;
+      right: -150px;
+      width: 300px;
+      height: 300px;
+      background: radial-gradient(circle, rgba(107,79,79,0.2), transparent 60%);
+      border-radius: 50%;
+      animation: float 14s ease-in-out infinite alternate;
+      z-index: 0;
+    }
+
+    @keyframes float {
+      from { transform: translateY(0);}
+      to { transform: translateY(20px);}
+    }
+
+    .container {
+      background: rgba(255, 255, 255, 0.7);
+      backdrop-filter: blur(8px);
+      border-radius: 15px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+      padding: 50px 30px;
+      max-width: 650px;
+      width: 100%;
+      text-align: center;
+      z-index: 10;
+      animation: fadeSlideDown 1s ease-out;
+    }
+
+    @keyframes fadeSlideDown {
+      from {
+        opacity: 0;
+        transform: translateY(-30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: #6b4f4f;
+      margin-bottom: 30px;
+      letter-spacing: 1px;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      align-items: center;
+    }
+
+    .upload-group {
+      width: 50%;
+      text-align: left;
+    }
+
+    label {
+      display: block;
+      font-weight: 700;
+      color: #4e3d3d;
+      margin-bottom: 8px;
+      font-size: 1.1rem;
+    }
+
+    .file-input {
+      display: block;
+      width: 100%;
+      border: 2px dashed #cbbeb5;
+      background: rgba(255,255,255,0.6);
+      color: #4e3d3d;
+      padding: 20px;
+      border-radius: 10px;
+      text-align: center;
+      font-weight: bold;
+      font-size: 1.1rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .file-input:hover {
+      background: rgba(255,255,255,0.8);
+      border-color: #6b4f4f;
+      transform: scale(1.02);
+    }
+
+    input[type="file"] {
+      display: none;
+    }
+
+    button {
+      background: linear-gradient(45deg, #cbbeb5, #6b4f4f);
+      border: 1;
+      color: #fff;
+      font-weight: bold;
+      font-size: 1.2rem;
+      padding: 12px 30px;
+      border-radius: 8px;
+      cursor: pointer;
+      box-shadow: 0 4px 15px rgba(107, 79, 79, 0.4);
+      transition: all 0.3s ease;
+    }
+
+    button:hover {
+      background: linear-gradient(45deg, #6b4f4f, #cbbeb5);
+      transform: scale(1.05);
+      box-shadow: 0 6px 20px rgba(107, 79, 79, 0.5);
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <h1>Upload Content and Style Images</h1>
+    <form method="POST" enctype="multipart/form-data">
+      <div class="upload-group">
+        <label for="content-upload">Content Image</label>
+        <label for="content-upload" class="file-input">Click to select Content Image</label>
+        <input type="file" id="content-upload" name="content" accept="image/*">
+      </div>
+      <div class="upload-group">
+        <label for="style-upload">Style Image</label>
+        <label for="style-upload" class="file-input">Click to select Style Image</label>
+        <input type="file" id="style-upload" name="style" accept="image/*">
+      </div>
+      <button type="submit">Generate Stylized Image</button>
+    </form>
+  </div>
+</body>
+
+
+</html>
